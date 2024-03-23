@@ -26,9 +26,17 @@ export async function getCourses(username, password) {
     const button = await page.waitForSelector(select);
     await button.evaluate((b) => b.click());
 
-    const viewmore = 'li.viewmore a';
-    await page.waitForSelector(viewmore);
-    await page.click(viewmore);
+    // const viewmore = 'li.viewmore a';
+    // await page.waitForSelector(viewmore);
+    // await page.click(viewmore);
+
+    try {
+      const viewmore = 'li.viewmore a';
+      await page.waitForSelector(viewmore);
+      await page.click(viewmore);
+    } catch (error) {
+      console.error('View more button not found:', error);
+    }
 
     const selector = '.contentnode li a';
     await page.waitForSelector(selector);

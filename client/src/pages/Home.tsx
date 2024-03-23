@@ -15,8 +15,9 @@ function Home() {
         setLoading(true);
 
         try {
-            const response = await axios.post('/api/evaluate', { username, password });
+            const response = await axios.post('http://localhost:3000/api/evaluate', { username, password });
             setCourses(response.data.courses);
+            console.log("res=> "+ JSON.stringify(response.data.courses));
         } catch (error) {
             setError('Error submitting form');
             console.error('Error:', error);
