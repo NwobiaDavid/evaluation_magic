@@ -1,10 +1,10 @@
 import 'dotenv/config';
 import puppeteer from 'puppeteer';
 
-export async function getCourses(username, password) {
+export async function getCourses(username, password, page) {
   try {
-    const browser = await puppeteer.launch({ headless: 'new' });
-    const page = await browser.newPage();
+    // const browser = await puppeteer.launch({ headless: 'new' });
+    // const page = await browser.newPage();
     await page.setDefaultNavigationTimeout(0);
 
     await page.goto(
@@ -30,6 +30,7 @@ export async function getCourses(username, password) {
     // await page.waitForSelector(viewmore);
     // await page.click(viewmore);
 
+
     try {
       const viewmore = 'li.viewmore a';
       await page.waitForSelector(viewmore);
@@ -41,6 +42,7 @@ export async function getCourses(username, password) {
     const selector = '.contentnode li a';
     await page.waitForSelector(selector);
 
+    console.log('-----------------working well------------------------')
     const courses = await page.evaluate(() => {
       const courseElements = document.querySelectorAll('.contentnode li a');
 
@@ -54,7 +56,7 @@ export async function getCourses(username, password) {
       });
     });
 
-    await browser.close();
+    // await browser.close();
 
     return courses;
   } catch (error) {
