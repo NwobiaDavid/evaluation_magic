@@ -22,7 +22,7 @@ function Home() {
             setCourses(response.data.courses);
             console.log("res=> " + JSON.stringify(response.data.courses));
         } catch (error) {
-            setError('Error submitting form');
+            setError('Error: Incorrect Username or Password');
             console.error('Error:', error);
         }
 
