@@ -7,6 +7,7 @@ Mixpanel.init(import.meta.env.VITE_APP_TOKEN);
 
 function App() {
 
+
   useEffect(() => {
     Mixpanel.track('Page View');
   }, []);

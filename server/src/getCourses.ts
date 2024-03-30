@@ -1,7 +1,7 @@
 import 'dotenv/config';
-import puppeteer from 'puppeteer';
+import puppeteer, { Page } from 'puppeteer';
 
-export async function getCourses(username, password, page) {
+export async function getCourses(username:string, password:string, page:Page) {
   try {
     // const browser = await puppeteer.launch({ headless: 'new' });
     // const page = await browser.newPage();
@@ -24,7 +24,10 @@ export async function getCourses(username, password, page) {
 
     const select = '.dropdown div [aria-labelledby="actionmenuaction-2"]';
     const button = await page.waitForSelector(select);
-    await button.evaluate((b) => b.click());
+    if (!button) {
+      throw new Error('Button not found');
+    }
+    await button.evaluate((b: Element) => (b as HTMLButtonElement).click());
 
     // const viewmore = 'li.viewmore a';
     // await page.waitForSelector(viewmore);
@@ -47,8 +50,8 @@ export async function getCourses(username, password, page) {
       const courseElements = document.querySelectorAll('.contentnode li a');
 
       return Array.from(courseElements).map((courseElement) => {
-        const courseName = courseElement.textContent.trim();
-        const courselink = courseElement.getAttribute('href');
+        const courseName = courseElement?.textContent?.trim() || '';
+        const courselink = courseElement?.getAttribute('href') || '';
         const url = new URL(courselink);
         const courseId = url.searchParams.get('course');
 
