@@ -9,7 +9,7 @@ import { getCourses } from './getCourses';
 
 const app = express();
 
-const PORT = process.env.PORT || "4000";
+const PORT: number = parseInt((process.env.PORT || '4000') as string, 10)
 
 app.use(
   cors({
