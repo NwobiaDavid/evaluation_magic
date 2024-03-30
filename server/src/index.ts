@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
  
 app.post('/api/evaluate', async (req, res) => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: "ne" });
   const page = await browser.newPage();
   const { username, password } = req.body;
 
