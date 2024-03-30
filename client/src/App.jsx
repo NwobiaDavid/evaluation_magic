@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import Home from './pages/Home';
 import Mixpanel from 'mixpanel-browser';
 
-Mixpanel.init(import.meta.env.VITE_APP_TOKEN);
 
 
 function App() {
-
+  
+  Mixpanel.init(import.meta.env.VITE_APP_TOKEN);
 
   useEffect(() => {
     Mixpanel.track('Page View');
