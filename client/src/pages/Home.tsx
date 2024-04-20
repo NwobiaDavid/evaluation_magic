@@ -82,7 +82,12 @@ function Home() {
 
 
                 </form>
-                {error && <p>{error}</p>}
+                {error && <span className='text-center' >
+                    <p>{error}</p>
+                    <p>
+                        make sure you have good internet connection
+                    </p>
+                </span>}
                 <div className=' text-white mt-10 ' >
                     {courses.map((course, index) => (
                         <div key={index}> Finished <span className="font-semibold ">{course.name}</span> course evaluation <IoSparklesSharp/> </div>

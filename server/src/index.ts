@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
  
 app.post('/api/evaluate', async (req, res) => {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: true ,timeout: 0,});
   const page = await browser.newPage();
   const { username, password } = req.body;
 
@@ -42,7 +42,8 @@ app.post('/api/evaluate', async (req, res) => {
     
     for (const obj of courses) {
       await page.goto(
-        `https://moodle.cu.edu.ng/mod/feedback/print.php?id=37969&courseid=${obj.id}`
+        // `https://moodle.cu.edu.ng/mod/feedback/print.php?id=37969&courseid=${obj.id}`
+        `https://moodle.cu.edu.ng/mod/feedback/complete.php?id=41019&courseid=${obj.id}`
         );
         
         await page.screenshot({ path: `screenshot_${num}.png` });
@@ -50,36 +51,36 @@ app.post('/api/evaluate', async (req, res) => {
       console.log("-------------entered the index page --------------")
 
       const selectorsList = [
-        { selector: 'multichoice_159593', option: 1 },
-        { selector: 'multichoice_159594', option: 1 },
-        { selector: 'multichoice_159596', option: 1 },
-        { selector: 'multichoice_159597', option: 1 },
+        { selector: 'multichoice_159593', option: 2 },
+        { selector: 'multichoice_159594', option: 4 },
+        { selector: 'multichoice_159596', option: 4 },
+        { selector: 'multichoice_159597', option: 2 },
         { selector: 'multichoice_159599', option: 1 },
-        { selector: 'multichoice_159600', option: 1 },
-        { selector: 'multichoice_159601', option: 1 },
-        { selector: 'multichoice_159602', option: 1 },
-        { selector: 'multichoice_159604', option: 1 },
+        { selector: 'multichoice_159600', option: 4 },
+        { selector: 'multichoice_159601', option: 3 },
+        { selector: 'multichoice_159602', option: 2 },
+        { selector: 'multichoice_159604', option: 4 },
         { selector: 'multichoice_159605', option: 1 },
         { selector: 'multichoice_159606', option: 1 },
-        { selector: 'multichoice_159607', option: 1 },
-        { selector: 'multichoice_159609', option: 1 },
-        { selector: 'multichoice_159610', option: 1 },
-        { selector: 'multichoice_159611', option: 1 },
-        { selector: 'multichoice_159613', option: 1 },
-        { selector: 'multichoice_159614', option: 1 },
-        { selector: 'multichoice_159615', option: 1 },
+        { selector: 'multichoice_159607', option: 3 },
+        { selector: 'multichoice_159609', option: 4 },
+        { selector: 'multichoice_159610', option: 4 },
+        { selector: 'multichoice_159611', option: 2 },
+        { selector: 'multichoice_159613', option: 4 },
+        { selector: 'multichoice_159614', option: 3 },
+        { selector: 'multichoice_159615', option: 2 },
         { selector: 'multichoice_159617', option: 1 },
-        { selector: 'multichoice_159618', option: 1 },
+        { selector: 'multichoice_159618', option: 4 },
         { selector: 'multichoice_159620', option: 1 },
-        { selector: 'multichoice_159621', option: 1 },
-        { selector: 'multichoice_159622', option: 1 },
+        { selector: 'multichoice_159621', option: 3 },
+        { selector: 'multichoice_159622', option: 4 },
         { selector: 'multichoice_159624', option: 1 },
-        { selector: 'multichoice_159625', option: 1 },
-        { selector: 'multichoice_159627', option: 1 },
-        { selector: 'multichoice_159628', option: 1 },
-        { selector: 'multichoice_159630', option: 1 },
-        { selector: 'multichoice_159631', option: 1 },
-        { selector: 'multichoice_159634', option: 1 },
+        { selector: 'multichoice_159625', option: 4 },
+        { selector: 'multichoice_159627', option: 3 },
+        { selector: 'multichoice_159628', option: 2 },
+        { selector: 'multichoice_159630', option: 3 },
+        { selector: 'multichoice_159631', option: 2 },
+        { selector: 'multichoice_159634', option: 3 },
       ];
 
       selectorsList.forEach(async (item) => {
@@ -88,7 +89,7 @@ app.post('/api/evaluate', async (req, res) => {
         await page.select(selector, optionValueToSelect);
       });
 
-      await page.type('#id_textfield_159633', 'Covenany University');
+      await page.type('#id_textfield_159633', 'Covenant University');
 
 
       const finish = 'button[type="submit"]';
